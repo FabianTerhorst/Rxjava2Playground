@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RxJava2Playground</string>
+    <string name="sample_string">a String</string>
+</resources>
