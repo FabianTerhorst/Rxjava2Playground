@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import org.reactivestreams.Subscription;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Optional;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -53,6 +56,46 @@ public class MainActivity extends AppCompatActivity {
         });
 
         disposable2.dispose();
+
+        Completable completable = Completable.create(completableSubscriber -> {
+            completableSubscriber.onSubscribe(() -> {
+
+            });
+            completableSubscriber.onComplete();
+        });
+
+        completable.subscribe(new Completable.CompletableSubscriber() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+        });
+
+        Optional<String> text = Optional.of("bla");
+
+
+        Single<Object> single = Single.create(singleSubscriber -> {
+            singleSubscriber.onSuccess(new Object());
+            singleSubscriber.onSubscribe(() -> {
+                Log.d("Disposable", "got disposed or successful");
+            });
+        });
+
+        Disposable disposable3 = single.subscribe(o -> {
+            Log.d("Disposable", "got the only message");
+        });
+
+        disposable3.dispose();
 
         Observable<Object> observable = Observable.create(observer -> {
             observer.onNext(new Object());
