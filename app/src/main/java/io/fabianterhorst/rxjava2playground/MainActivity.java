@@ -14,6 +14,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Optional;
 import io.reactivex.Single;
+import io.reactivex.Try;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -78,11 +79,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSubscribe(Disposable d) {
 
+                d.dispose();
             }
         });
 
         Optional<String> text = Optional.of("bla");
 
+        Try<String> text2 = Try.ofValue("bla2");
 
         Single<Object> single = Single.create(singleSubscriber -> {
             singleSubscriber.onSuccess(new Object());
