@@ -16,6 +16,7 @@ import io.reactivex.Optional;
 import io.reactivex.Single;
 import io.reactivex.Try;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +34,13 @@ public class MainActivity extends AppCompatActivity {
                               @Override
                               public void request(long n) {
                                   Log.d("flowable", "request");
-                                  if (n == 2) {
+                                  if (n < 0) {
+                                      s.onError(new Exception());
+                                  } else if (n == 2) {
                                       Log.d("flowable", "hello subscription");
+                                      s.onNext(new Object());
+                                  } else {
+                                      s.onComplete();
                                   }
                               }
 
